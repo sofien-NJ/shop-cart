@@ -1,10 +1,12 @@
 <template>
   <div class="card">
     <h3>{{ product.name }}</h3>
-    <h5 class="price">Price: ${{ product.price.tofixed(2) }}</h5>
+    <h5 class="price">Price: ${{ product.price.toFixed(2) }}</h5>
     <p class="description">Description: {{ description }}</p>
     <p class="text-muted">{{ product.category }}</p>
-    <button class="view-product-buttom">View</button>
+    <button class="view-product-button" @click="$emit('view-product', product)">
+      View Product
+    </button>
   </div>
 </template>
 
@@ -13,8 +15,44 @@ export default {
   props: ["product"],
   computed: {
     description() {
-      return this.product.description.substring(0, 150);
+      return this.product.description.substring(0, 75);
     },
   },
 };
 </script>
+<style lang="scss">
+.card {
+  width: 50%;
+  margin: 10%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px gray;
+
+  h5.price {
+    color: gray;
+  }
+  p.description {
+    font-size: 0.85rem;
+  }
+  p.text-muted {
+    color: gray;
+  }
+}
+button.view-product-button {
+  padding: 10px;
+  background-color: rgb(252, 200, 122);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.15rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+@media (min-width: 500px) {
+  .card {
+    width: 200px;
+    margin: 5px;
+  }
+}
+</style>

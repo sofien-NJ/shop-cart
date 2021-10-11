@@ -4,12 +4,19 @@
       >Home</router-link
     >
 
-    <router-link :class="{ active: $route.name === 'cart' }" to="/cart"
+    <router-link :class="{ active: $route.name === 'Cart' }" to="/cart"
       >Cart</router-link
     >
   </div>
   <router-view />
 </template>
+<script>
+export default {
+  mounted() {
+    this.$store.commit("updateCartFromLocalStorage");
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -30,6 +37,7 @@ body {
   background-color: rgb(245, 245, 245);
 }
 #nav {
+  align-items: center;
   padding: 10px;
   width: 100px;
   height: 30px;
@@ -41,7 +49,7 @@ a {
   color: darkgray;
   text-decoration: none;
   margin: 0 5px 0 5px;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 
   &.active {
     color: #2c3e50;
